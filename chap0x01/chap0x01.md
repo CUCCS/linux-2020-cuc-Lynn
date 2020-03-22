@@ -48,7 +48,7 @@
 
 ·把用于ubuntu18.04.4镜像文件从Windows复制进虚拟机：
 
-    sudo mkdir loopdir #创建一个用于挂载ISO文件的目录
+   sudo mkdir loopdir #创建一个用于挂载ISO文件的目录
 
     sudo mount -o loop ubuntu-18.04.4-server-amd64.iso loopdir #挂载iso镜像文件到该目录
 
@@ -67,38 +67,54 @@
 
 ![修改引导界面文件](/images/修改引导界面文件.PNG)
 
-·提前阅读并编辑定制Ubuntu官方提供的示例preseed.cfg，并将该文件保存到刚才创建的工作目录~/cd/preseed/ubuntu-server-autoinstall.seed
-   通过psftp将下载保存的.seed文件先上传到虚拟机根目录下，再移动到~/cd/preseed/，注意移动指令在根目录下，需要切换目录
+·提前阅读并编辑定制Ubuntu官方提供的示例preseed.cfg，并将该文件保存到刚才创建的工作目录
+
+   ~/cd/preseed/ubuntu-server-autoinstall.seed
+
+    #通过psftp将下载保存的.seed文件先上传到虚拟机根目录下，再移动到~/cd/preseed/，注意移动指令在根目录下，需要切换目录
 
 ![传输.seed文件](/images/psftp传输preseed.PNG)
 
 ![移动.seed至工作目录](/images/移动至当前目录.PNG)
 
-·在cd目录下修改isolinux/isolinux.cfg，增加内容timeout 10  指令:sudo vi isolinux/isolinux.cfg
+·在cd目录下修改isolinux/isolinux.cfg，增加内容timeout 10
+
+    sudo vi isolinux/isolinux.cfg
 
 ![增加timeout10](/images/timeout10.PNG)
 
 ·重新生成md5sum.txt  
      
-   由于一直拒绝访问，sudo su进入到root权限
+    #由于一直拒绝访问，sudo su进入到root权限
 
 ![生成md5sum.txt](/images/md5sum文件生成.PNG)
 
 ·封闭改动后的目录到.iso   
 
-  错误信息：无 mkisofs 命令(提示安装genisoimage)
+   #错误信息：无 mkisofs 命令(提示安装genisoimage)
+
+    #查找并安装相应的软件包
+    apt-cache search mkisofs
+    sudo apt install genisoimage
+
 
 ![安装genisoimage](/images/安装genisoimage.PNG)
 
 ![封装目录到.iso](/images/封装成功.PNG)
 
-·生成custom.iso，使用PSFTP传入宿主机,先将镜像文件移至虚拟机根目录下，通过ls查看到远程文件列表，lcd改变本地目录避免
+·镜像制作完成(生成了custom.iso），使用PSFTP传入宿主机
 
-unable to open问题 
+    #先将cd目录下镜像文件移至虚拟机根目录下
+     sudo mv custom.iso /home/lynn/
+    
+     #通过ls查看到远程文件列表，lcd改变本地目录避免unable to open问题 
+     
 
 ![下载custom.iso出错](/images/下载出错.PNG)
 
 ![宿主机下载custom.iso](/images/psftp下载.PNG)
+
+![下载成功](/images/下载成功.PNG)
 
 ·在VirtualBox上完成自动安装
 
@@ -129,7 +145,17 @@ unable to open问题
 
 ![安装出现异常](/images/error.PNG)
 
-·解决方法：
+·解决方法：(暂未解决……)
+
+·问题五：用另一个系统重新安装的时候，若在普通用户下安装genisoimage，运行封装命令会报错
+   genisoimage:missing pathspec
+
+·解决方法：sudo su 进入root权限，在root权限下安装genisoimage，在用sudo运行mkisofs命令，成功，如下图：
+
+![普通用户安装时](/images/安装genisoimage2.PNG)
+
+![root用户安装时](/images/安装genisoimage3.PNG)
+
 
 ## 参考资料
 
@@ -142,3 +168,5 @@ unable to open问题
 · https://github.com/CUCCS/2015-linux-public-yangyisama/blob/master/Exp1/Exp1.md
 
 · https://blog.csdn.net/flowrush/article/details/79943387
+
+· https://blog.csdn.net/stark_summer/article/details/42640757?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158486382419724845030571%2522%252C%2522scm%2522%253A%252220140713.130056874..%2522%257D&request_id=158486382419724845030571&biz_id=0&utm_source=distribute.pc_search_result.none-task
