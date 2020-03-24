@@ -1,9 +1,3 @@
-#无人值守安装ios
+# linux-2020-cuc-Lynn
 
-##安装过程
-
-##配置双网卡
-
-##sftp传输文件
-
-###问题及解决
+### linux-2020-cuc-Lynn created by GitHub Classroom
