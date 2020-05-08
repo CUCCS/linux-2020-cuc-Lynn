@@ -215,20 +215,26 @@
       给ResolutionCompress函数传参的时候两个参数之间忘打空格
     ```bash
     convert "$img" -gravity southeast -fill red -pointsize 16 -draw "text 5,5 '$watermark_text'" ./out_w/"$filename"."$typename"
-   ```
-
-* 如下wget命令下载数据文件失败：Connecting timed out
-   
-   ```bash
-   wget http://sec.cuc.edu.cn/huangwei/course/LinuxSysAdmin/exp/chap0x04/worldcupplayerinfo.tsv 
-   ```
-   解决：将文件下载到本地，再用psftp上传到服务器目录下
+    ```
 
 * 执行`bash weblog.sh -u4 100` 时卡住，无结果输出也无报错信息
   ![error](images/error.PNG)
 
   解决：调试模式运行`bash -x weblog.sh -u4 100`发现一条awk语句少了个参数，添加后成功执行
 
+* git push报错error: failed to push some refs to 'xxx.com:
+
+  解决方法参考[here](https://blog.csdn.net/smile__1/article/details/103340374)
+ 
+* 有一次错误地将.travis.yml文件commit并push到`master`,后来再修改`chap0x04`分支的.travis.yml文件时发现合并发生冲突，报错:
+  ```bash
+  Failing back to patching base and 3-way merge....
+  Auto-merging .travis.yml
+  CONFLICT (content) : Merge conflict in .travis.yml
+  error: Failed to merge in the change`
+  ```
+   解决：原因是`master`在`chap0x04`创建后发生了修改,删除并重建`chap0x04`分支
+  
 * `shellcheck`提示`Double quote to prevent globbing and word splitting.`  不太清楚原因
   ![warning](images/warning.PNG)
   
@@ -244,3 +250,4 @@
 * [Linux awk 命令](https://www.runoob.com/linux/linux-comm-awk.html)
 * [awk的工作原理](https://man.linuxde.net/awk#awk的工作原理)
 * [Linux sed 命令使用](https://blog.csdn.net/qq_37931597/article/details/86505723?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158881785319726869027256%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.57675%2522%257D&request_id=158881785319726869027256&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-7)
+* [使用travis-ci自动部署github上的项目](https://www.cnblogs.com/morang/p/7228488.html)
