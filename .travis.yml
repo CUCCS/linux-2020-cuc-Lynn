@@ -18,7 +18,7 @@ before_install:
 
 script:
   - ls -l
-  - bash chap0x04/Codes/gcd.sh
+    # - bash chap0x04/Codes/gcd.sh
   - printf "=============== Task1===============\n"
   - bash chap0x04/Codes/image-batching.sh -h
   - bash chap0x04/Codes/image-batching.sh -d chap0x04/images/ -q 50%
