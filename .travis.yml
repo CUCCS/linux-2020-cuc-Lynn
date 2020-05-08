@@ -43,6 +43,11 @@ script:
   - bash chap0x04/Codes/weblog.sh -uh  "/images/KSC-logosmall.gif" 100
   - ls -l
 
+after_script:
+  - /usr/bin/shellcheck chap0x04/Codes/image-batching.sh
+  - /usr/bin/shellcheck chap0x04/Codes/player-data.sh
+  - /usr/bin/shellcheck chap0x04/Codes/weblog.sh
+
 after_failure:
   - id
   - pwd
