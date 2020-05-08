@@ -3,7 +3,7 @@ sudo: required
 language: bash
 
 before_install:
-  - sudo apt-get update
+  - sudo apt update
   - sudo apt-get update -q
   - export scversion="stable" # or "v0.4.7", or "latest"
   - wget "https://storage.googleapis.com/shellcheck/shellcheck-${scversion}.linux.x86_64.tar.xz"
@@ -11,13 +11,13 @@ before_install:
   - sudo cp shellcheck-"${scversion}"/shellcheck /usr/bin/
   - /usr/bin/shellcheck --version
 
-  - sudo apt install imagemagick
+  - sudo apt install -y imagemagick p7zip-full
   - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/worldcupplayerinfo.tsv"
   - wget "https://c4pr1c3.github.io/LinuxSysAdmin/exp/chap0x04/web_log.tsv.7z"
-  - sudo apt install p7zip-full
   - 7z x web_log.tsv.7z
 
 script:
+  - ls -l
   - bash chap0x04/Codes/gcd.sh
   - printf "=============== Task1===============\n"
   - bash chap0x04/Codes/image-batching.sh -h
@@ -41,7 +41,7 @@ script:
   - bash chap0x04/Codes/weblog.sh -r
   - bash chap0x04/Codes/weblog.sh -u4 100
   - bash chap0x04/Codes/weblog.sh -uh  "/images/KSC-logosmall.gif" 100
-
+  - ls -l
 
 after_failure:
   - id
