@@ -1,3 +1,3 @@
-# linux-2020-cuc-Lynn
+#  linux-2020-cuc-Lynn created by Github Classroom
 
-### linux-2020-cuc-Lynn created by GitHub Classroom
+## This branch is used for Shell scripting exercises
