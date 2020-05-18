@@ -83,7 +83,7 @@
           #启动nginx服务
           $ sudo service nginx start
 
-        > nginx错误日志：/var/log/nginx/error.
+        > nginx错误日志：/var/log/nginx/error.log
         
     * 成功访问nginx
      ![nginx_successfully](img/nginx_successfully.PNG)
@@ -291,8 +291,8 @@
       * 点击`login.php`页面下方的`Create/Reset Database`生成需要使用的数据库。如果数据库连接成功，页面会直接重定向到登录页面，如下图，使用 `admin/password`登录。
        ![dvwa_install_successfully](img/dvwa_install_successfully.PNG)
 
-    * VeryNginx作为本次实验的Web App的反向代理服务器和WAF
-      * 在verynginx中配置matcher、upstream和proxy pass
+   * VeryNginx作为本次实验的Web App的反向代理服务器和WAF
+     * 在verynginx中配置matcher、upstream和proxy pass
      ![matcher1](img/matcher1.PNG)
      ![upstrea&&proxy](img/backend.PNG)
 
