@@ -2,8 +2,9 @@
 
 ## 软件环境
 
-* 测试客户端：window 10 ，IP：192.168.0.106
-            Ubuntu 18.04 server 64bit，Host-Only网卡，IP：192.168.56.101
+* 测试客户端：
+  * window 10 ，IP：192.168.0.106
+  * Ubuntu 18.04 server 64bit，Host-Only网卡，IP：192.168.56.101
 
 * 服务端 
   * Ubuntu 18.04 server 64bit，Host-Only网卡，IP：192.168.56.102
@@ -12,12 +13,11 @@
   * WordPress 4.7
   * Damn Vulnerable Web Application (DVWA)
 
-   |   | http端口 |
-   -|-|-
-   | nginx | 8080 |
-   | verynginx | 80 |
-   | wordpress | 8181 |
-   | dvwa | 5566 |
+  * 配置的http端口:
+    * nginx : 8080
+    * verynginx : 80
+    * wordpress : 8181
+    * dvwa : 5566
 
 ## 实验过程
 
@@ -301,14 +301,13 @@
   * 1、使用IP地址方式均无法访问上述任意站点，并向访客展示自定义的友好错误提示信息页面-1
 
     * 添加matcher
-     ![ip_reject](img/ip_reject.PNG)
+      ![ip_reject](img/ip_reject.PNG)
     * 添加response
-     ![response](img/response.PNG)
+      ![response](img/response.PNG)
     * 添加filter
-     ![ip_reject](img/ip_reject.PNG)
-
+      ![ip_reject](img/ip_reject.PNG)
     * 无法通过IP访问
-     ![deny_ip](img/deny_ip.PNG)
+      ![deny_ip](img/deny_ip.PNG)
 
           #测试后所有IP均无法访问站点，需更改配置文件重新登陆
           $ sudo vim /opt/verynginx/verynginx/configs/config.json
@@ -335,6 +334,7 @@
       ![wp_repair](img/wp_repair.PNG)
      * 添加filter
       ![wp_repair_filter](img/wp_repair_filter.PNG)
+      
      * 添加后访问失败，返回404
       ![404](img/WordPress_Username_Enumeration.PNG)
 
@@ -342,14 +342,14 @@
     * 设置低安全等级
      ![low_security](img/low_security.PNG)
     * sql注入
-     ![dvwa_sql_injection](img/dvwa_sql_injection.PNG)
+     ![dvwa_sql_injection](img/dvwa_sql_injection.png)
     * 防护规则：：针对 SQL 注入常用关键词进行防护
     * 添加matcher
      ![dvwa_sql_injecton_matcher](img/dvwa_sql_injecton_matcher.PNG)
     * 添加response
      ![dvwa_sql_response](img/dvwa_sql_response.PNG)
     * 添加filter
-     ![dvwa_sql_injection_filter](IMG/dvwa_sql_injection_filter.PNG)
+     ![dvwa_sql_injection_filter](img/dvwa_sql_injection_filter.PNG)
     * 防护后
      ![sql_injection_refused](img/sql_injection_refused.PNG)
 
