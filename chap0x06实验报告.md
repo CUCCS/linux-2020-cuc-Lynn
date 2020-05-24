@@ -140,7 +140,7 @@
   
      * 对于设置了no_root_squash的共享目录
       ![no_rsquash](images/no_rsquash.PNG)
-      ![show_server_files](imagES/server_files.PNG)
+      ![show_server_files](images/server_files.PNG)
 
      * 对于没有设置no_root_squash的共享目录，无法在工作主机(client)写入文件，创建目录
       ![rsquash](images/rsquash.PNG)
