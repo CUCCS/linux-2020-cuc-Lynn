@@ -92,6 +92,7 @@
   * 配置一个支持用户名和密码方式访问的账号，该账号继承匿名访问者所有权限，且拥有对另1个独立目录及其子目录完整读写（包括创建目录、修改文件、删除文件等）权限
   
     * 用户名密码登录
+    
       ![user_poggio_login](images/user_poggio_login.PNG)
 
     * 在poggio用户的目录下出现了匿名用户目录下的文件，可证明继承匿名者访问权限
@@ -101,6 +102,7 @@
      ![delete_mkdir_rename](images/delete_mkdir_rename.PNG)
 
     * FTP用户不能越权访问指定目录之外的任意其他目录和文件（注意：不是通过 绝对路径 方式来遍历，而是验证通过 相对路径 （例如 cd ../../../../ ）方式无法翻出 FTP 服务器指定的当前用户的 家目录 访问到 家目录及其所有子目录 以外的任何其他目录）
+     
      ![越权访问_prohibit](images/越权访问_prohibit.PNG)
 
     * 匿名访问权限仅限白名单IP来源用户访问，禁止白名单IP以外的访问
@@ -136,8 +138,11 @@
 
   * 客户端共享目录中文件、子目录的属主、权限信息和在NFS服务器端的信息,uid和gid一致
     * client
+     
      ![client](images/client.PNG)
+     
     * server
+    
      ![server](images/server.PNG)
 
   * 参照资料
@@ -146,11 +151,15 @@
      * 添加两个/home下的共享目录，分别设置`no_root_squash`和不设置`no_root_squash`
   
      * 对于设置了no_root_squash的共享目录
+     
       ![no_rsquash](images/no_rsquash.PNG)
+      
       ![show_server_files](images/server_files.PNG)
 
      * 对于没有设置no_root_squash的共享目录，无法在工作主机(client)写入文件，创建目录
+     
       ![rsquash](images/rsquash.PNG)
+      
       ![server_no_file](images/server_no_file.PNG)
   
   * 参考[how-to-set-up-an-nfs-mount-on-ubuntu-18-04](https://www.digitalocean.com/community/tutorials/how-to-set-up-an-nfs-mount-on-ubuntu-18-04)
@@ -206,7 +215,9 @@
                    dhcp4: yes
     
     * 实验结果
+    
      ![dhcp_active](images/dhcp_active.PNG)
+     
      ![client_new_ip](images/client_new_ip.PNG)
     
   * 参考[isc-dhcp-server](https://help.ubuntu.com/community/isc-dhcp-server)
@@ -256,7 +267,9 @@
             nameserver 192.168.57.1
       * sudo resolvconf -u
   * 测试结果：
+  
    ![client_dig_dns1](images/client_dig_dns.PNG)
+   
    ![client_dig_dns2](images/client_dig_dns2.PNG)
 
   * 参考[DNS_Service](https://ubuntu.com/server/docs/service-domain-name-service-dns)
@@ -275,14 +288,18 @@
      ![路径](images/添加网络位置.PNG)
      
     * 输入共享文件夹路径
+    
      ![网站位置](images/指定网站位置.PNG)
+     
      ![网站名称](images/网站名称.PNG)
 
     * 访问匿名目录，不用输入账号密码，且不可以创建文件夹
      ![访问guest文件夹](images/访问匿名目录.PNG)
 
     * 访问指定用户文件夹，需要输入账号密码，且可以创建文件夹，(注：此处的账号密码是之前配置过的samba用户与密码)
+    
      ![访问demo文件夹](images/账号密码访问目录.PNG)
+     
      ![创建文件夹](images/demo_mkdir_newfile.PNG)
   
   * **在Linux上连接Windows10上的服务器**
@@ -301,6 +318,7 @@
      ![访问smb_usr](images/访问smb_usr.PNG)
 
     * 下载整个目录
+    
      ![get_whole_folder](images/get_whole_folder.PNG)
   
   * 参考
@@ -320,6 +338,7 @@
       修改Dockerfile文件，添加一行内容：`ENV DEBIAN_FRONTEND noninteractive`
 
 * 3、ftpd 连接时报错`421 service not available`
+
   ![ftp_connect_error](images/ftp_error.PNG)
 
       #查看服务vsftpd是否开启
