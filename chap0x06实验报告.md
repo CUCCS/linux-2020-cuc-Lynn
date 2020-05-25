@@ -5,7 +5,7 @@
 
 * ubuntu18.04 server 64bit
    * 工作主机：lynn@cuc-svr，IP：192.168.56.101
-   * 目标主机：mumu@cuc-svr，IP：192.168.56.102
+   * 目标主机：root@mumu，IP：192.168.56.102
 
 ## 实验要求
    参照[chap0x06课件](https://c4pr1c3.github.io/LinuxSysAdmin/chap0x06.md.html#/1)、[shell脚本编程基本要求](https://c4pr1c3.github.io/LinuxSysAdmin/chap0x06.exp.md.html#/shell)
