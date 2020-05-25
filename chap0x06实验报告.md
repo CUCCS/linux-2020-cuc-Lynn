@@ -9,15 +9,15 @@
 
 ## 实验要求
    参照[chap0x06课件](https://c4pr1c3.github.io/LinuxSysAdmin/chap0x06.md.html#/1)、[shell脚本编程基本要求](https://c4pr1c3.github.io/LinuxSysAdmin/chap0x06.exp.md.html#/shell)
-   - [x] FTP
+   * FTP
      * 对照第6章课件中的要求选择一款合适的FTP服务器软件支持所有任务要求
-   - [x] NFS
+   * NFS
      * 对照第6章课件中的NFS服务器配置任务
-   - [x] DHCP
+   * DHCP
      * 2台虚拟机使用Internal网络模式连接，其中一台虚拟机上配置DHCP服务，另一台服务器作为DHCP客户端，从该DHCP服务器获取网络地址配置
-   - [x] Samba
+   * Samba
      * 对照第6章课件中smbclient一节的3点任务要求完成Samba服务器配置和客户端配置连接测试
-   - [x] DNS
+   * DNS
      * 基于上述Internal网络模式连接的虚拟机实验环境，在DHCP服务器上配置DNS服务，使得另一台作为DNS客户端的主机可以通过该DNS服务器进行DNS查询
     在DNS服务器上添加`zone "cuc.edu.cn"` 的以下解析记录
 
@@ -26,6 +26,13 @@
            wp.sec.cuc.edu.cn A <自行填写第5章实验中配置的WEB服务器的IP地址>
            dvwa.sec.cuc.edu.cn CNAME wp.sec.cuc.edu.cn
 
+## 完成情况
+  - [x] FTP自动安装、自动配置
+  - [x] NFS自动安装、自动配置
+  - [x] DHCP自动安装、自动配置
+  - [x] DNS手动安装、手动配置
+  - [x] Samba手动安装、半自动配置
+  
 ## 实验过程
 
 * **配置远程目标主机的SSH免密root登录**
@@ -74,10 +81,10 @@
   * 通过工作主机运行脚本在目标主机安装vsftpd并完成相关配置
   
     * 将脚本文件`vsftpd.sh`拷贝到目标主机：`scp -i .ssh/foo workspace/shell/vsftpd.sh root@192.168.56.102:workspace/`
-    ![传输脚本到目标主机](images/scp_vsftpd_sh.PNG)
+     ![传输脚本到目标主机](images/scp_vsftpd_sh.PNG)
 
     * 借助SSH的远程命令执行功能实现目标主机控制安装和配置：`ssh -i .ssh/foo root@192.168.56.102 'bash workspace/vsftpd.sh'`
-    ![运行脚本结果](images/bash_vsftpd_sh.PNG)
+     ![运行脚本结果](images/bash_vsftpd_sh.PNG)
 
   * 配置一个提供匿名访问的FTP服务器，匿名访问者可以访问1个目录且仅拥有该目录及其所有子目录的只读访问权限
    ![anonymous_get_oneFile](images/anonymous_get_oneFile.PNG)
@@ -85,7 +92,7 @@
   * 配置一个支持用户名和密码方式访问的账号，该账号继承匿名访问者所有权限，且拥有对另1个独立目录及其子目录完整读写（包括创建目录、修改文件、删除文件等）权限
   
     * 用户名密码登录
-     ![user_poggio_login](images/user_poggio_login.PNG)
+      ![user_poggio_login](images/user_poggio_login.PNG)
 
     * 在poggio用户的目录下出现了匿名用户目录下的文件，可证明继承匿名者访问权限
      ![继承权限](images/继承匿名用户权限.PNG)
@@ -129,9 +136,9 @@
 
   * 客户端共享目录中文件、子目录的属主、权限信息和在NFS服务器端的信息,uid和gid一致
     * client
-      ![client](images/client.PNG)
+     ![client](images/client.PNG)
     * server
-      ![server](images/server.PNG)
+     ![server](images/server.PNG)
 
   * 参照资料
     > By default, NFS translates requests from a root user remotely into a non-privileged user on the server. This was intended as security feature to prevent a root account on the client from using the file system of the host as root. no_root_squash disables this behavior for certain shares.
@@ -159,8 +166,8 @@
   
     * 先将两台虚拟机增加网卡为`内部网络`网络模式,`client`:工作主机；`server`:目标主机
       * 注意界面名称必须一致
-      ![client_internet](images/client_internet.PNG)
-      ![server_internet](images/server_internet.PNG)
+       ![client_internet](images/client_internet.PNG)
+       ![server_internet](images/server_internet.PNG)
   
     * server配置
       * 通过`scp`将脚本`dhcp.sh`拷贝到目标主机，通过`ssh`方式远程执行脚本
@@ -199,8 +206,8 @@
                    dhcp4: yes
     
     * 实验结果
-    ![dhcp_active](images/dhcp_active.PNG)
-    ![client_new_ip](images/client_new_ip.PNG)
+     ![dhcp_active](images/dhcp_active.PNG)
+     ![client_new_ip](images/client_new_ip.PNG)
     
   * 参考[isc-dhcp-server](https://help.ubuntu.com/community/isc-dhcp-server)
 
@@ -249,8 +256,8 @@
             nameserver 192.168.57.1
       * sudo resolvconf -u
   * 测试结果：
-    ![client_dig_dns1](images/client_dig_dns.PNG)
-    ![client_dig_dns2](images/client_dig_dns2.PNG)
+   ![client_dig_dns1](images/client_dig_dns.PNG)
+   ![client_dig_dns2](images/client_dig_dns2.PNG)
 
   * 参考[DNS_Service](https://ubuntu.com/server/docs/service-domain-name-service-dns)
 
@@ -265,16 +272,18 @@
     > 服务启动\停止\重启等命令：`/etc/init.d/smbd {start|stop|reload|restart|force-reload|status}`
 
     * 打开资源管理器，右键“此电脑”，选择“添加一个网络位置”
+     ![路径](images/添加网络位置.PNG)
+     
     * 输入共享文件夹路径
-    ![路径](images/添加网络位置.PNG)
-    ![位置](images/网站名称.PNG)
+     ![网站位置](images/指定网站位置.PNG)
+     ![网站名称](images/网站名称.PNG)
 
     * 访问匿名目录，不用输入账号密码，且不可以创建文件夹
-    ![访问guest文件夹](images/访问匿名目录.PNG)
+     ![访问guest文件夹](images/访问匿名目录.PNG)
 
     * 访问指定用户文件夹，需要输入账号密码，且可以创建文件夹，(注：此处的账号密码是之前配置过的samba用户与密码)
-    ![访问demo文件夹](images/账号密码访问目录.PNG)
-    ![创建文件夹](images/demo_mkdir_newfile.PNG)
+     ![访问demo文件夹](images/账号密码访问目录.PNG)
+     ![创建文件夹](images/demo_mkdir_newfile.PNG)
   
   * **在Linux上连接Windows10上的服务器**
   > sudo apt install smbclient
@@ -302,7 +311,7 @@
 ## 遇到的问题
 
 * 1、设置root免密登录时 报错`root@192.168.56.102: Permission denied (publickey).`,尝试修改文件权限,或参照[ToubleShooting](https://help.ubuntu.com/community/SSH/OpenSSH/Keys#Troubleshooting)新建目录等方法都未解决，如下：
-  ![Permission_denied](images/ssh_Error.PNG)
+  ![Permission_denied](images/ssh_error.PNG)
   解决：后来不执行[参考教程](https://askubuntu.com/questions/115151/how-to-set-up-passwordless-ssh-access-for-root-user)中锁定root用户密码的步骤，就成功了。虽然免密登录成功，但还不太清楚报错的原因
 
 * 2、apt install时报错如下，原因是apt安装依赖时并非静默安装，需要交互，所以无法正常通过
