@@ -250,3 +250,4 @@
 * [Linux awk 命令](https://www.runoob.com/linux/linux-comm-awk.html)
 * [awk的工作原理](https://man.linuxde.net/awk#awk的工作原理)
 * [Linux sed 命令使用](https://blog.csdn.net/qq_37931597/article/details/86505723?ops_request_misc=%257B%2522request%255Fid%2522%253A%2522158881785319726869027256%2522%252C%2522scm%2522%253A%252220140713.130102334.pc%255Fall.57675%2522%257D&request_id=158881785319726869027256&biz_id=0&utm_medium=distribute.pc_search_result.none-task-blog-2~all~first_rank_v2~rank_v25-7)
+* [使用travis-ci自动部署github上的项目](https://www.cnblogs.com/morang/p/7228488.html)
