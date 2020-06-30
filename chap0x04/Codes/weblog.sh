@@ -32,7 +32,7 @@ function HostTop {
 	#head -n指定显示行数
 
 	host=$(sed '1d' "$file" | awk -F '\t' '{print $1}' | sort | uniq -c | sort -nr | head -n $num)
-	echo -e "Top ${num} Host:\n$host\n"#  >> HostTop.log
+	echo -e "Top ${num} Host:\n$host\n"  >> HostTop.log
 }
 
 #统计访问来源主机TOP 100 IP和分别对应出现的总次数
@@ -44,7 +44,7 @@ function IpTop {
 	#awk识别ip并统计出现次数
 	# ~ 匹配正则表达式 END语句块在读完所有行后执行
 	IP=$(sed '1d' "$file" | awk '{if ($1~/^([0-2]*[0-9]*[0-9])\.([0-2]*[0-9]*[0-9])\.([0-2]*[0-9]*[0-9])\.([0-2]*[0-9]*[0-9])$/){print $1}}'| awk -F '\t' '{a[$1]++} END{for(i in a) {print (a[i],i)}}' | sort -nr | head -n $num)
-	echo -e "Top ${num} IP:\n$IP\n"# >> IpTop.log
+	echo -e "Top ${num} IP:\n$IP\n" >> IpTop.log
 }
 
 #统计最频繁被访问的URL TOP 100
@@ -53,7 +53,7 @@ function UrlTop {
         num=$2
 
 	URL=$(sed '1d' "$file" | awk -F '\t' '{print $5}' | sort | uniq -c | sort -nr | head -n $num)
-	echo -e "Top${num} URL:\n$URL\n"# >> UrlTop.log
+	echo -e "Top${num} URL:\n$URL\n" >> UrlTop.log
 }
 
 #统计不同响应状态码的出现次数和对应百分比
@@ -61,7 +61,7 @@ function Response {
 	file=$1
 
 	code=$(sed '1d' "$file" | awk -F '\t' 'BEGIN{ans=0}{a[$6]++;ans++} END{for(i in a) {printf ("%-10s%-10d%10.3f\n",i,a[i],a[i]*100/ans)}}')
-	echo -e " Responses appearing times and ratio:\n$code\n"# >> Response.log
+	echo -e " Responses appearing times and ratio:\n$code\n" >> Response.log
 
 }
 
@@ -77,7 +77,7 @@ function Response4XX {
 	#对每一个4XX状态码重新遍历文件
 	for n in $code ; do
 		top=$(awk -F '\t' '{ if($6=='"$n"') {a[$5]++}} END {for(i in a) {print a[i],i}}' "$1" | sort -nr | head -n $num)
-		echo -e "${n} Top ${num} URL:\n$top\n"# >> Response4xxTop.log
+		echo -e "${n} Top ${num} URL:\n$top\n" >> Response4xxTop.log
 	done
 }
 
@@ -88,7 +88,7 @@ function SpecifiedURLHosts {
 	num=$3
 
 	uh=$(sed '1d' "$file" | awk -F '\t' '{if($5=="'$URL'") {host[$1]++}} END{for (i in host) {print host[i],i}}' | sort -nr | head -n $num)
-	echo -e "URL: $URL\n\n${uh}"# >> SpecifiedURLHost.log
+	echo -e "URL: $URL\n\n${uh}" >> SpecifiedURLHost.log
 
 }
 
